@@ -1,2 +1,2 @@
 # CompLenguajes
-repositorio de la clase de comparacion de lenguajes
+Repository for the Programming Languages Comparison course at the University of Puerto Rico
