@@ -1,32 +1,34 @@
-package main
-
 /*
  * File: time_components.go
- * Author: Franz Zbinden
- * Course: COTI 4039_vh1
- * Porpuse: x
+ * Author: Antonio F. Huertas
+ * Course: COTI 4039-LH1
+ * Date: 09/08/2025
+ * Purpose: This program computes and displays the components (hours, minutes,
+ *          and seconds) of a moment in time.
  */
 
-import "fmt" //para formatear input y output
+package main
 
+import "fmt"
+
+// Computes the components (hours, minutes, and seconds) of a moment in time.
 func timeComponents(elapsedSecs int) (hrs, mins, secs int) {
+
 	const (
-		secsPerHour   = 3600
-		secsPerMinute = 60
+		secsPerHour, minsPerHour = 3600, 60
 	)
-
 	hrs = elapsedSecs / secsPerHour
-	remainingSecs := elapsedSecs % secsPerHour
+	remSecs := elapsedSecs % secsPerHour
+	mins = remSecs / minsPerHour
+	secs = remSecs - mins*minsPerHour
 
-	mins = remainingSecs / secsPerMinute
-	secs = remainingSecs % secsPerMinute
 	return hrs, mins, secs
+
 }
 
+// Starts the execution of the program.
 func main() {
-	elapsedSeconds := 12345
-	fmt.Println("The number of elapsed seconds is", elapsedSeconds)
-
-	hours, minutes, seconds := timeComponents(elapsedSeconds)
-	fmt.Printf("\nThis is %d hours, %d minutes, and %d seconds", hours, minutes, seconds)
+	elapsed := 10000
+	hrs, mins, secs := timeComponents(elapsed)
+	fmt.Printf("\nThe time is %d hours, %d minutes and %d seconds", hrs, mins, secs)
 }
