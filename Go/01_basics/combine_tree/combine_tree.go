@@ -1,13 +1,15 @@
-package main
-
 /*
- * File: circle_calc.go
- * Author: Franz Zbinden Garcia
- * Course: COTI 4039_vh1
- * Porpuse: x
+ * File: combine_three.go
+ * Author: Franz Zbinden
+ * Course: COTI 4039-LH1
+ * Date: 09/10/2025
+ * Purpose: This program computes and displays the result of combining three
+ *          numbers using the given two-argument function.
  */
 
-import "fmt" //para formatear input y output
+package main
+
+import "fmt"
 
 // Computes the sum of two numbers.
 func sum(num1, num2 int) int {
@@ -20,7 +22,6 @@ func minimum(num1, num2 int) int {
 		return num1
 	}
 	return num2
-
 }
 
 // Combines three numbers using the given two-argument function.
@@ -29,13 +30,25 @@ func combineThree(num1, num2, num3 int, combineTwo func(int, int) int) int {
 	return combineTwo(temp, num3)
 }
 
-// The main function is the entry point for all Go programs.
+// Starts the execution of the program.
 func main() {
+	number1, number2, number3 := 4, 2, 6
+	fmt.Printf("The numbers are %d, %d, and %d\n", number1, number2, number3)
 
-	fmt.Println(sum(1, 2))
+	fmt.Println("\nTheir sum is", combineThree(number1, number2, number3, sum))
+	fmt.Println("Their minimum is", combineThree(number1, number2, number3, minimum))
 
-	fmt.Println(minimum(2, 1))
+	// Computes the minimum of two numbers.
+	maximum := func(n1, n2 int) int {
+		if n1 > n2 {
+			return n1
+		}
+		return n2
+	}
+	fmt.Println("Their maximum is", combineThree(number1, number2, number3, maximum))
 
-	fmt.Println(combineThree(2, 1, 3))
-
+	fmt.Println("Their product is", combineThree(number1, number2, number3,
+		func(n1, n2 int) int {
+			return n1 * n2
+		}))
 }
