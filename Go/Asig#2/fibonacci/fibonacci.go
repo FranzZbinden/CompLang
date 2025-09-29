@@ -2,8 +2,7 @@
  * File: fibonacci.go
  * Author: Franz Zbinden Garcia
  * Course: COTI 4039-LH1
- * Date:
- * Purpose:
+ * Purpose: A file compleating the first part of the Assigment#2
  */
 
 package main
