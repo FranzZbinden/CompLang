@@ -99,6 +99,15 @@ func insertionSort[E cmp.Ordered](slice []E) {
 	}
 }
 
+func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
+	if len(slice) == 0 {
+		return -1
+	}
+	mid := len(slice) / 2
+
+	if slice(mid)
+}
+
 func main() {
 
 	nums := []int{10, 20, 30, 40, 50}
@@ -108,13 +117,13 @@ func main() {
 	fmt.Println("Recursive index of 50:", index(nums, 50)) // expect 4
 	fmt.Println("Recursive index of 99:", index(nums, 99)) // expect -1
 
-	data := []int{10, 20, 30, 40, 50}
+	data := []int{20, 15, 45, 40, 13}
 
 	fmt.Println(binarySearch(data, 30)) // (2, true)
 	fmt.Println(binarySearch(data, 10)) // (0, true)
 	fmt.Println(binarySearch(data, 99)) // (-1, false)
 
-	fmt.Println()
+	(insertionSort(data))
 
 	fmt.Println(isSorted(data))
 }
