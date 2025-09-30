@@ -29,7 +29,7 @@ func index[E comparable](slice []E, target E) int {
 }
 
 // func index[E comparable](slice []E, target E) int {
-// //for practice
+
 // }
 
 // A function binarySearch that uses recursion to search for a target in a
@@ -59,9 +59,9 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	}
 }
 
-// func binarySearchh[E cmp.Ordered](slice []E, target E) (int, bool) {
-//for practice
-// }
+func binarySearchh[E cmp.Ordered](slice []E, target E) (int, bool) {
+
+}
 
 // function isSorted that returns true if a slice is sorted in ascending order:
 func isSorted[E cmp.Ordered](slice []E) bool {
@@ -81,7 +81,17 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 }
 
 func isSortedd[E cmp.Ordered](slice []E) bool {
-
+	if len(slice) <= 1 {
+		return true
+	}
+	var sorted bool
+	if slice[0] <= slice[1] {
+		sorted := isSorted(slice[1:])
+	}
+	if sorted {
+		return true
+	}
+	return false
 }
 
 // function insertionSort that sorts a slice in place using insertion sort algorithm:
