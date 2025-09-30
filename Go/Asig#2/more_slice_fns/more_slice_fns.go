@@ -28,6 +28,10 @@ func index[E comparable](slice []E, target E) int {
 
 }
 
+// func index[E comparable](slice []E, target E) int {
+// //for practice
+// }
+
 // A function binarySearch that uses recursion to search for a target in a
 // sorted slice and return the position of the target and true if the target
 // is found or its insertion point and false if the target was not found:
@@ -55,6 +59,10 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	}
 }
 
+// func binarySearchh[E cmp.Ordered](slice []E, target E) (int, bool) {
+//for practice
+// }
+
 // function isSorted that returns true if a slice is sorted in ascending order:
 func isSorted[E cmp.Ordered](slice []E) bool {
 
@@ -70,6 +78,10 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 		return true
 	}
 	return false
+}
+
+func isSortedd[E cmp.Ordered](slice []E) bool {
+
 }
 
 // function insertionSort that sorts a slice in place using insertion sort algorithm:
@@ -97,15 +109,6 @@ func insertionSort[E cmp.Ordered](slice []E) {
 		// So insert key at the correct sorted position
 		slice[j+1] = key
 	}
-}
-
-func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
-	if len(slice) == 0 {
-		return -1
-	}
-	mid := len(slice) / 2
-
-	if slice(mid)
 }
 
 func main() {
