@@ -10,6 +10,13 @@ package main
 
 import "fmt"
 
+// Represents the common information for all employees.
+type employeeInfo struct {
+	id         string
+	name       string
+	department department
+}
+
 // Represents the set of available departments.
 type department int
 
@@ -36,13 +43,6 @@ func (d department) String() string {
 	return deptName[d]
 }
 
-// Represents the common information for all employees.
-type employeeInfo struct {
-	id         string
-	name       string
-	department department
-}
-
 // Returns the string representation of the employee info.
 func (ei employeeInfo) String() string {
 	return fmt.Sprintf("ID: %s, Name: %s, Department: %s",
@@ -61,6 +61,13 @@ type hourlyEmployee struct {
 	hoursWorked   int
 }
 
+// Represents a salesperson with commission rate and sales amount.
+type salesperson struct {
+	employeeInfo
+	commissionRate float64
+	salesAmount    float64
+}
+
 // Computes the weekly salary of the hourly employee.
 func (he hourlyEmployee) weeklySalary() float64 {
 	if he.hoursWorked <= 40 {
@@ -76,13 +83,6 @@ func (he hourlyEmployee) weeklySalary() float64 {
 func (he hourlyEmployee) String() string {
 	return fmt.Sprintf("%s, Hourly Pay Rate: $%.2f, Hours Worked: %d",
 		he.employeeInfo, he.hourlyPayRate, he.hoursWorked)
-}
-
-// Represents a salesperson with commission rate and sales amount.
-type salesperson struct {
-	employeeInfo
-	commissionRate float64
-	salesAmount    float64
 }
 
 // Computes the weekly salary of the salesperson.
