@@ -10,21 +10,25 @@ package main
 
 import "fmt"
 
+// Employee basic info Struct
 type employeeInfo struct {
 	id, name, dpt, typeEmp string
 }
 
+// Employee type hourly
 type employeeH struct {
 	hourlyPayRate float64
 	hours         int
 	employeeInfo
 }
 
+// Employee type Sales
 type employeeS struct {
 	commission, sales float64
 	employeeInfo
 }
 
+// Calculates weekly salary of hourly employee
 func (emp employeeH) weeklySalary() float64 {
 	if emp.hours <= 0 {
 		return 0
@@ -40,14 +44,17 @@ func (emp employeeH) weeklySalary() float64 {
 	}
 }
 
+// Calculates weekly salary of Sales employee
 func (emp employeeS) weeklySalary() float64 {
 	return emp.sales * emp.commission
 }
 
+// Employee Interface
 type employee interface {
 	weeklySalary() float64
 }
 
+// Printing data funcion for Hourly/Sales
 func printData(emp employee) {
 	switch e := emp.(type) {
 	case employeeS:

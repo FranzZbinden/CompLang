@@ -12,6 +12,7 @@ import (
 	"fmt"
 )
 
+// Search for a target in a slice and return the position
 func index[E comparable](slice []E, target E) int {
 	if len(slice) == 0 {
 		return -1
@@ -23,9 +24,9 @@ func index[E comparable](slice []E, target E) int {
 
 	indexNum := index(slice[1:], target)
 	return indexNum + 1
-
 }
 
+// Search for a target in a sorted slice and return the position
 func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	if len(slice) == 0 {
 		return 0, false
@@ -46,6 +47,7 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	}
 }
 
+// Returns true if a slice is sorted in ascending order
 func isSorted[E cmp.Ordered](slice []E) bool {
 
 	if len(slice) <= 1 {
@@ -62,6 +64,7 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 	return false
 }
 
+// Sorts a slice in place using insertion sort algorithm
 func insertionSort[E cmp.Ordered](slice []E) {
 
 	for i := 1; i < len(slice); i++ {
@@ -77,6 +80,7 @@ func insertionSort[E cmp.Ordered](slice []E) {
 	}
 }
 
+// Eeturns the minimum and maximum of a variable number of values
 func extrema[E cmp.Ordered](values ...E) (min, max E) {
 	if len(values) == 0 {
 		panic("No values provided!!")
