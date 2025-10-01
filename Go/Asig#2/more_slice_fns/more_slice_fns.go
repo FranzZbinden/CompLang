@@ -13,7 +13,6 @@ import (
 )
 
 func index[E comparable](slice []E, target E) int {
-
 	if len(slice) == 0 {
 		return -1
 	}
@@ -23,21 +22,13 @@ func index[E comparable](slice []E, target E) int {
 	}
 
 	indexNum := index(slice[1:], target)
-
 	return indexNum + 1
 
 }
 
-// func index[E comparable](slice []E, target E) int {
-
-// }
-
-// A function binarySearch that uses recursion to search for a target in a
-// sorted slice and return the position of the target and true if the target
-// is found or its insertion point and false if the target was not found:
 func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	if len(slice) == 0 {
-		return -1, false
+		return 0, false
 	}
 	middle := len(slice) / 2
 
@@ -51,15 +42,10 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	} else {
 		// search right half
 		index, found := binarySearch(slice[middle+1:], target)
-		if found {
-			// adjust index, left + middle
-			return middle + 1 + index, found
-		}
-		return -1, false
+		return middle + 1 + index, found // ✅ always adjust index
 	}
 }
 
-// function isSorted that returns true if a slice is sorted in ascending order:
 func isSorted[E cmp.Ordered](slice []E) bool {
 
 	if len(slice) <= 1 {
@@ -76,7 +62,6 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 	return false
 }
 
-// function insertionSort that sorts a slice in place using insertion sort algorithm:
 func insertionSort[E cmp.Ordered](slice []E) {
 
 	for i := 1; i < len(slice); i++ {
@@ -93,61 +78,66 @@ func insertionSort[E cmp.Ordered](slice []E) {
 }
 
 func extrema[E cmp.Ordered](values ...E) (min, max E) {
-	// Panic if no values provided
 	if len(values) == 0 {
-		panic("extrema: no values provided")
+		panic("No values provided!!")
 	}
 
-	// Initialize min and max with the first value
 	min = values[0]
 	max = values[0]
 
-	// Single loop to find both min and max
-	for i := 1; i < len(values); i++ {
-		if values[i] < min {
-			min = values[i]
+	for index := 1; index < len(values); index++ {
+		if values[index] < min {
+			min = values[index]
 		}
-		if values[i] > max {
-			max = values[i]
+		if values[index] > max {
+			max = values[index]
 		}
 	}
-
 	return min, max
+}
+
+func isSortedNums[E cmp.Ordered](slice []E) string {
+	if isSorted(slice) {
+		return "\nThe slice is sorted"
+	}
+	return "\nThe slice is not sorted"
 }
 
 func main() {
 
-	nums := []int{10, 20, 30, 40, 50}
+	nums := []int{10, -1, 0, 3, 28, -30, -7, 41, -6, 39}
 
-	// Recursive tests
-	fmt.Println("Recursive index of 30:", index(nums, 30)) // expect 2
-	fmt.Println("Recursive index of 50:", index(nums, 50)) // expect 4
-	fmt.Println("Recursive index of 99:", index(nums, 99)) // expect -1
+	fmt.Printf("The slice is %v\n", nums)
 
-	data := []int{20, 15, 45, 40, 13}
+	max, min := extrema(10, -1, 0, 3, 28, -30, -7, 41, -6, 39)
+	fmt.Printf("The extrema are %d and %d\n", min, max)
 
-	fmt.Println(binarySearch(data, 30)) // (2, true)
-	fmt.Println(binarySearch(data, 10)) // (0, true)
-	fmt.Println(binarySearch(data, 99)) // (-1, false)
+	fmt.Println()
 
-	(insertionSort(data))
+	key := -6
+	index, found := binarySearch(nums, key)
+	fmt.Printf("Does it contain -6? %v\n", found)
+	fmt.Printf("Key %d was found at index #%d\n", key, index)
 
-	fmt.Println(isSorted(data))
+	key2 := 20
+	_, found2 := binarySearch(nums, key2)
+	fmt.Printf("Does it contain 20? %v", found2)
 
-	// Test extrema function
-	fmt.Println("\n--- Testing extrema function ---")
-	min1, max1 := extrema(5, 2, 9, 1, 7, 3)
-	fmt.Printf("extrema(5, 2, 9, 1, 7, 3) -> min: %d, max: %d\n", min1, max1)
+	fmt.Println()
 
-	min2, max2 := extrema(3.14, 2.71, 1.41, 2.23)
-	fmt.Printf("extrema(3.14, 2.71, 1.41, 2.23) -> min: %.2f, max: %.2f\n", min2, max2)
+	fmt.Println(isSortedNums(nums))
+	insertionSort(nums)
+	fmt.Printf("The slice in ascending order is %v", nums)
+	fmt.Println(isSortedNums(nums))
 
-	min3, max3 := extrema("zebra", "apple", "mango", "banana")
-	fmt.Printf("extrema(\"zebra\", \"apple\", \"mango\", \"banana\") -> min: %s, max: %s\n", min3, max3)
+	fmt.Println()
 
-	min4, max4 := extrema(42)
-	fmt.Printf("extrema(42) -> min: %d, max: %d\n", min4, max4)
+	index3, found3 := binarySearch(nums, key)
+	fmt.Printf("Does it contain %d? %v\n", key, found3)
+	fmt.Printf("Key %d was found at index #%d\n", key, index3)
 
-	// Uncomment to test panic:
-	// extrema[int]() // This will panic
+	index4, found4 := binarySearch(nums, 20)
+	fmt.Printf("Does it contain %d? %v\n", 20, found4)
+	fmt.Printf("Key %d should be inserted at index #%d\n", 20, index4)
+
 }
