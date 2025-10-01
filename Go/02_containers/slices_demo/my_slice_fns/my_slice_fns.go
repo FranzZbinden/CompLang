@@ -1,8 +1,7 @@
 /*
  * File: my_slice_fns.go
  * Author: Antonio F. Huertas
- * Course: COTI 4039-LH1
- * Date: 09/17/2025, 09/22/2025
+ * Course: COTI 4039-VH1
  * Purpose: This program demonstrates how to define some slice functions.
  */
 
