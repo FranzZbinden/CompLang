@@ -43,7 +43,7 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	} else {
 		// search right half
 		index, found := binarySearch(slice[middle+1:], target)
-		return middle + 1 + index, found // ✅ always adjust index
+		return middle + 1 + index, found
 	}
 }
 
