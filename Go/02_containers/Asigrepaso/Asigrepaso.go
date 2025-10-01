@@ -78,41 +78,29 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 
 // function insertionSort that sorts a slice in place using insertion sort algorithm:
 func insertionSort[E cmp.Ordered](slice []E) {
-
+	// Outer loop: start from index 1 (because a slice of 1 element is already "sorted")
 	for i := 1; i < len(slice); i++ {
-		key := slice[i]
+
+		// Take the current element we want to insert into the sorted left side
+		key := slice[i] // "key" = the element we are trying to put in the right position
+
+		// Start comparing from the element just before key (the left side of the slice)
 		j := i - 1
 
+		// Inner loop: shift elements to the right until the right spot for "key" is found
+		// Condition means: "while we haven’t gone past the start AND slice[j] is bigger than key"
 		for j >= 0 && slice[j] > key {
+			// Shift slice[j] one position to the right
 			slice[j+1] = slice[j]
+
+			// Move j one step left (to keep checking earlier elements)
 			j--
 		}
 
+		// When we break out of the loop, j is at the position just before where key belongs
+		// So insert key at the correct sorted position
 		slice[j+1] = key
 	}
-}
-
-func extrema[E cmp.Ordered](values ...E) (min, max E) {
-	// Panic if no values provided
-	if len(values) == 0 {
-		panic("extrema: no values provided")
-	}
-
-	// Initialize min and max with the first value
-	min = values[0]
-	max = values[0]
-
-	// Single loop to find both min and max
-	for i := 1; i < len(values); i++ {
-		if values[i] < min {
-			min = values[i]
-		}
-		if values[i] > max {
-			max = values[i]
-		}
-	}
-
-	return min, max
 }
 
 func main() {
@@ -133,21 +121,4 @@ func main() {
 	(insertionSort(data))
 
 	fmt.Println(isSorted(data))
-
-	// Test extrema function
-	fmt.Println("\n--- Testing extrema function ---")
-	min1, max1 := extrema(5, 2, 9, 1, 7, 3)
-	fmt.Printf("extrema(5, 2, 9, 1, 7, 3) -> min: %d, max: %d\n", min1, max1)
-
-	min2, max2 := extrema(3.14, 2.71, 1.41, 2.23)
-	fmt.Printf("extrema(3.14, 2.71, 1.41, 2.23) -> min: %.2f, max: %.2f\n", min2, max2)
-
-	min3, max3 := extrema("zebra", "apple", "mango", "banana")
-	fmt.Printf("extrema(\"zebra\", \"apple\", \"mango\", \"banana\") -> min: %s, max: %s\n", min3, max3)
-
-	min4, max4 := extrema(42)
-	fmt.Printf("extrema(42) -> min: %d, max: %d\n", min4, max4)
-
-	// Uncomment to test panic:
-	// extrema[int]() // This will panic
 }
