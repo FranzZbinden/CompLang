@@ -80,6 +80,17 @@ func insertionSort[E cmp.Ordered](slice []E) {
 	}
 }
 
+func indexx[E cmp.Ordered](slice []E, target int) int {
+	if len(slice) == 0 {
+		return -1
+	}
+	if slice[0] == target {
+		return 0
+	}
+	sumIndex := indexx(slice[1:], target)
+	return 1 + sumIndex
+}
+
 // Eeturns the minimum and maximum of a variable number of values
 func extrema[E cmp.Ordered](values ...E) (min, max E) {
 	if len(values) == 0 {
