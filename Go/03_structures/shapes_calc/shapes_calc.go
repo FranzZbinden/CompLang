@@ -79,6 +79,10 @@ type circle struct {
 	radius float64
 }
 
+type triangle struct {
+	color string
+}
+
 // Computes the area of the circle.
 func (c circle) area() float64 {
 	return math.Pi * math.Pow(c.radius, 2.0)

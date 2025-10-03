@@ -8,7 +8,10 @@
 
 package main
 
-import "cmp"
+import (
+	"cmp"
+	"fmt"
+)
 
 func index(slice []int, target int) int {
 	if len(slice) == 0 {
@@ -52,4 +55,55 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 		return true
 	}
 	return false
+}
+
+func power(slice []int, power int) {
+	for i := 0; i < len(slice); i++ {
+		result := slice[i]
+		for j := 0; j < power; j++ {
+			result = result * slice[i]
+		}
+		slice[i] = result
+	}
+
+}
+
+func i(slice []int) {
+	for i := 0; i < len(slice); i++ {
+		result := 1
+		for j := 0; j < slice[i]; j++ {
+			result = result * slice[i]
+		}
+		slice[i] = result
+	}
+
+}
+
+func sumation(slice []int) int {
+	if len(slice) == 0 {
+		return 0
+	}
+	result := 0
+	for i := 0; i < len(slice); i++ {
+		result += slice[i]
+	}
+	return result
+}
+
+func main() {
+	nums := []int{1, 2, 3, 4, 5}
+
+	power(nums, 3)
+
+	fmt.Println(nums)
+
+	nums2 := []int{1, 2, 3, 4, 5}
+
+	i(nums2)
+
+	fmt.Println(nums2)
+
+	sum := sumation(nums2)
+
+	fmt.Println(sum)
 }
