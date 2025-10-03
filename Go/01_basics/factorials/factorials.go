@@ -65,8 +65,6 @@ func factorialGen() func() int {
 }
 
 
-
-
 //a function that when called, it sets a recording of how many times it has benn called
 func numGen()func() int{
 	count := 0
