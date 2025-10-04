@@ -47,13 +47,6 @@ func factorialRec(num int) int {
 	return num * factorialRec(num-1)
 }
 
-func factorialRec2(num int) int {
-	if num == 0 {
-		return 1
-	}
-	return num * factorialRec2(num-1)
-}
-
 // Generates each value in the factorial sequence by returning a closure.
 func factorialGen() func() int {
 	prod, cnt := 1, 1
@@ -63,27 +56,6 @@ func factorialGen() func() int {
 		return prod
 	}
 }
-
-
-//a function that when called, it sets a recording of how many times it has benn called
-func numGen()func() int{
-	count := 0
-	returnfunc()int{
-		return count += 1
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Starts the execution of the program.
 func main() {
