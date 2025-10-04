@@ -26,6 +26,32 @@ func fibonacciIter(num int) int {
 	return a
 }
 
+func fibonacciiter(num int) int {
+	a := 0
+	b := 1
+
+	if num == 0 {
+		return 0
+	}
+	for i := 1; i < num; i++ {
+		temp := a
+		a = b
+		b = temp + b
+	}
+	return a
+}
+
+func fibonaccirec(val int) int {
+	if val == 0 {
+		return 0
+	}
+	if val == 1 {
+		return 1
+	}
+	return fibonaccirec(val-1) + fibonaccirec(val-2)
+
+}
+
 // Fibonacci using recursion
 func fibonacciRec(num int) int {
 	if num == 0 {
