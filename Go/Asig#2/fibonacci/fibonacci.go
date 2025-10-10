@@ -1,7 +1,7 @@
 /*
  * File: fibonacci.go
  * Author: Franz Zbinden Garcia
- * Course: COTI 4039-LH1
+ * Course: COTI 4039-VH1
  * Purpose: A file compleating the first part of the Assigment#2
  */
 
@@ -11,6 +11,7 @@ import (
 	"fmt"
 )
 
+// Fibonacci using iteration
 func fibonacciIter(num int) int {
 	a, b := 0, 1
 
@@ -25,6 +26,33 @@ func fibonacciIter(num int) int {
 	return a
 }
 
+func fibonacciiter(num int) int {
+	a := 0
+	b := 1
+
+	if num == 0 {
+		return 0
+	}
+	for i := 1; i < num; i++ {
+		temp := a
+		a = b
+		b = temp + b
+	}
+	return a
+}
+
+func fibonaccirec(val int) int {
+	if val == 0 {
+		return 0
+	}
+	if val == 1 {
+		return 1
+	}
+	return fibonaccirec(val-1) + fibonaccirec(val-2)
+
+}
+
+// Fibonacci using recursion
 func fibonacciRec(num int) int {
 	if num == 0 {
 		return 0
@@ -35,6 +63,7 @@ func fibonacciRec(num int) int {
 	return fibonacciRec(num-1) + fibonacciRec(num-2)
 }
 
+// Generates generates Fibonacci numbers using an anonymous function.
 func fibonacciGen() func() int {
 	a, b := 0, 1
 	return func() int {

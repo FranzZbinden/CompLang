@@ -1,7 +1,7 @@
 /*
  * File: fibonacci.go
  * Author: Franz Zbinden Garcia
- * Course: COTI 4039-LH1
+ * Course: COTI 4039-VH1
  * Purpose: A file compleating the first part of the Assigment#2
  */
 
@@ -12,8 +12,8 @@ import (
 	"fmt"
 )
 
+// Search for a target in a slice and return the position
 func index[E comparable](slice []E, target E) int {
-
 	if len(slice) == 0 {
 		return -1
 	}
@@ -23,21 +23,13 @@ func index[E comparable](slice []E, target E) int {
 	}
 
 	indexNum := index(slice[1:], target)
-
 	return indexNum + 1
-
 }
 
-// func index[E comparable](slice []E, target E) int {
-
-// }
-
-// A function binarySearch that uses recursion to search for a target in a
-// sorted slice and return the position of the target and true if the target
-// is found or its insertion point and false if the target was not found:
+// Search for a target in a sorted slice and return the position
 func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	if len(slice) == 0 {
-		return -1, false
+		return 0, false
 	}
 	middle := len(slice) / 2
 
@@ -51,15 +43,15 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	} else {
 		// search right half
 		index, found := binarySearch(slice[middle+1:], target)
-		if found {
-			// adjust index, left + middle
-			return middle + 1 + index, found
-		}
-		return -1, false
+		return middle + 1 + index, found
 	}
 }
 
+<<<<<<< HEAD
 // function isSorted that returns true if a slice is sorted in ascending order:
+=======
+// Returns true if a slice is sorted in ascending order
+>>>>>>> origin/main
 func isSorted[E cmp.Ordered](slice []E) bool {
 
 	if len(slice) <= 1 {
@@ -76,49 +68,98 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 	return false
 }
 
+<<<<<<< HEAD
 // function insertionSort that sorts a slice in place using insertion sort algorithm:
+=======
+// Sorts a slice in place using insertion sort algorithm
+>>>>>>> origin/main
 func insertionSort[E cmp.Ordered](slice []E) {
-	// Outer loop: start from index 1 (because a slice of 1 element is already "sorted")
+
 	for i := 1; i < len(slice); i++ {
+		key := slice[i]	//element to compare
+		j := i - 1		//element to be compared to
 
-		// Take the current element we want to insert into the sorted left side
-		key := slice[i] // "key" = the element we are trying to put in the right position
-
-		// Start comparing from the element just before key (the left side of the slice)
-		j := i - 1
-
-		// Inner loop: shift elements to the right until the right spot for "key" is found
-		// Condition means: "while we haven’t gone past the start AND slice[j] is bigger than key"
 		for j >= 0 && slice[j] > key {
-			// Shift slice[j] one position to the right
 			slice[j+1] = slice[j]
-
-			// Move j one step left (to keep checking earlier elements)
 			j--
 		}
 
-		// When we break out of the loop, j is at the position just before where key belongs
-		// So insert key at the correct sorted position
-		slice[j+1] = key
+		slice[j+1] = key	//inserts element in correct spot
 	}
+}
+
+func insertionSort[E cmp.Ordered](slice []E) {
+	for i := 1; i < len(slice); i++ {
+		key := slice[i]
+		j := i - 1
+
+		for j >= 0
+	}
+
+}
+
+// Eeturns the minimum and maximum of a variable number of values
+func extrema[E cmp.Ordered](values ...E) (min, max E) {
+	if len(values) == 0 {
+		panic("No values provided!!")
+	}
+
+	min = values[0]
+	max = values[0]
+
+	for index := 1; index < len(values); index++ {
+		if values[index] < min {
+			min = values[index]
+		}
+		if values[index] > max {
+			max = values[index]
+		}
+	}
+	return min, max
+}
+
+func isSortedNums[E cmp.Ordered](slice []E) string {
+	if isSorted(slice) {
+		return "\nThe slice is sorted"
+	}
+	return "\nThe slice is not sorted"
 }
 
 func main() {
 
-	nums := []int{10, 20, 30, 40, 50}
+	nums := []int{10, -1, 0, 3, 28, -30, -7, 41, -6, 39}
 
-	// Recursive tests
-	fmt.Println("Recursive index of 30:", index(nums, 30)) // expect 2
-	fmt.Println("Recursive index of 50:", index(nums, 50)) // expect 4
-	fmt.Println("Recursive index of 99:", index(nums, 99)) // expect -1
+	fmt.Printf("The slice is %v\n", nums)
 
-	data := []int{20, 15, 45, 40, 13}
+	max, min := extrema(10, -1, 0, 3, 28, -30, -7, 41, -6, 39)
+	fmt.Printf("The extrema are %d and %d\n", min, max)
 
-	fmt.Println(binarySearch(data, 30)) // (2, true)
-	fmt.Println(binarySearch(data, 10)) // (0, true)
-	fmt.Println(binarySearch(data, 99)) // (-1, false)
+	fmt.Println()
 
-	(insertionSort(data))
+	key := -6
+	index, found := binarySearch(nums, key)
+	fmt.Printf("Does it contain -6? %v\n", found)
+	fmt.Printf("Key %d was found at index #%d\n", key, index)
 
-	fmt.Println(isSorted(data))
+	key2 := 20
+	_, found2 := binarySearch(nums, key2)
+	fmt.Printf("Does it contain 20? %v", found2)
+
+	fmt.Println()
+
+	fmt.Println(isSortedNums(nums))
+	insertionSort(nums)
+	fmt.Printf("The slice in ascending order is %v", nums)
+	fmt.Println(isSortedNums(nums))
+
+	fmt.Println()
+
+	index3, found3 := binarySearch(nums, key)
+	fmt.Printf("Does it contain %d? %v\n", key, found3)
+	fmt.Printf("Key %d was found at index #%d\n", key, index3)
+
+	index4, found4 := binarySearch(nums, 20)
+	fmt.Printf("Does it contain %d? %v\n", 20, found4)
+	fmt.Printf("Key %d should be inserted at index #%d\n", 20, index4)
+
 }

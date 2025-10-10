@@ -47,13 +47,6 @@ func factorialRec(num int) int {
 	return num * factorialRec(num-1)
 }
 
-func factorialRec2(num int) int {
-	if num == 0 {
-		return 1
-	}
-	return num * factorialRec2(num-1)
-}
-
 // Generates each value in the factorial sequence by returning a closure.
 func factorialGen() func() int {
 	prod, cnt := 1, 1
