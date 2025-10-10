@@ -27,6 +27,8 @@ func main() {
 		"COTI3101": 4, "SICI3205": 3, "SICI4036": 3, "COTI4039": 3,
 	}
 
+	// 	map := map[string]int{
+
 	fmt.Println("The map of courses to credits is", courses)
 	fmt.Println("Its length is", len(courses))
 
