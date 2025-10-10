@@ -59,10 +59,6 @@ func binarySearch[E cmp.Ordered](slice []E, target E) (int, bool) {
 	}
 }
 
-func binarySearchh[E cmp.Ordered](slice []E, target E) (int, bool) {
-
-}
-
 // function isSorted that returns true if a slice is sorted in ascending order:
 func isSorted[E cmp.Ordered](slice []E) bool {
 
@@ -75,20 +71,6 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 		sorted = isSorted(slice[1:])
 	}
 	if sorted == true {
-		return true
-	}
-	return false
-}
-
-func isSortedd[E cmp.Ordered](slice []E) bool {
-	if len(slice) <= 1 {
-		return true
-	}
-	var sorted bool
-	if slice[0] <= slice[1] {
-		sorted := isSorted(slice[1:])
-	}
-	if sorted {
 		return true
 	}
 	return false
