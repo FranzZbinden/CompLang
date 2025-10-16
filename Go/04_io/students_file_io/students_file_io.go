@@ -2,7 +2,7 @@
  * File: students_file_io.go
  * Author: Antonio F. Huertas
  * Course: COTI 4039-LH1
- * Date: 09/29/2025
+ * Date: 10/01/2025
  * Purpose: This program reads a group of students from a file, evaluates
  *          them, and creates a new file with their average and grade.
  */
@@ -11,7 +11,11 @@ package main
 
 import (
 	"bufio"
+	"errors"
+	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 // Represents a student with id, name, and a list of exams.
@@ -60,15 +64,31 @@ func evaluate(std student) evaluation {
 func parseStudentLine(line string) (student, error) {
 	var empty student
 
-	// TODO Complete this function
-	return empty, nil
+	fields := strings.Split(line, "|")
+	if len(fields) != 5 {
+		return empty, errors.New("Incorrect format in line: " + line)
+	}
+
+	id := strings.TrimSpace(fields[0])
+	name := strings.TrimSpace(fields[1])
+
+	exams := []int{}
+	for _, field := range fields[2:] {
+		field = strings.TrimSpace(field)
+		exam, err := strconv.Atoi(field)
+		if err != nil {
+			return empty, errors.New("Invalid numeric data in line: " + line)
+		}
+		exams = append(exams, exam)
+	}
+	return student{id, name, exams}, nil
 }
 
 // Returns the evaluation line for the given student.
 func newEvaluationLine(std student) string {
 	eval := evaluate(std)
-	// TODO Complete this function
-	return ""
+	return fmt.Sprintf("%s|%s|%.1f|%c\n", std.id, std.name,
+		eval.average, eval.grade)
 }
 
 // Starts the execution of the program.
@@ -80,13 +100,13 @@ func main() {
 	if err != nil {
 		panic("Error opening input file " + inFilename)
 	}
-	defer inFile.Close()
+	defer inFile.Close() // close inFile when main finishes
 
 	outFile, err := os.Create(outFilename)
 	if err != nil {
 		panic("Error opening output file " + outFilename)
 	}
-	defer outFile.Close()
+	defer outFile.Close() // close outFile when main finishes
 
 	scanner := bufio.NewScanner(inFile)
 	for scanner.Scan() {
@@ -97,4 +117,28 @@ func main() {
 		}
 		outFile.WriteString(newEvaluationLine(student))
 	}
+}
+
+func main2() {
+	in_file_name := "students.txt"
+	out_file_name := "evaluations.txt"
+
+	inFile, err := os.Open(in_file_name)
+	if err != nil {
+		panic("Error opening file")
+	}
+	defer inFile.Close()
+
+	outFile, err := os.Create(out_file_name)
+	if err != nil {
+		panic("File not created")
+
+	}
+	defer outFile.Close()
+
+	scanner := bufio.NewScanner(inFile)
+	for scanner.Scan() {
+
+	}
+
 }
