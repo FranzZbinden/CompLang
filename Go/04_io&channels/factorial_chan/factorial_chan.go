@@ -9,9 +9,7 @@
 
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // Represents a number-factorial pair.
 type pair struct {
@@ -21,46 +19,44 @@ type pair struct {
 
 // Computes the factorial of the given number and puts the number-factorial pair
 // into the given channel.
-// concurrencia es una funcion no determinista
-// concurrencia con pararelismo
-func factorialToChan(num int, ch chan<- pair) { //ch es un canal en la que puedo colocar pairs
+func factorialToChan(num int, ch chan<- pair) {
 	prod := 1
+
 	for cnt := 1; cnt <= num; cnt++ {
 		prod *= cnt
 	}
-
-	ch <- pair{number: num, factorial: prod} //saca del canal y lo pone en ch
+	ch <- pair{number: num, factorial: prod}
 }
 
 // Returns a channel with the factorial sequence up to the given limit.
-func factorialSeq(limit int) <-chan int { // concurrencia pero no paralelismo
+func factorialSeq(limit int) <-chan int {
 	prod := 1
-	ch := make(chan int) //crea un canal sin tamaño , sin buffer
+	ch := make(chan int)
 
-	go func() { // esto corre, luego pausa, main lo muestra, main pausa, func genera prod y asi sicesivamente
+	go func() {
 		defer close(ch)
 		for cnt := 1; cnt <= limit; cnt++ {
 			prod *= cnt
 			ch <- prod
 		}
-	}() //el () significa que se esta llamando ahi mismo
+	}()
 	return ch
 }
 
 // Starts the execution of the program.
 func main() {
-	numbers := []int{0, 1, 5, 7, 10, 12}
+	numbers := []int{7, 10, 0, 12, 1, 5}
 
-	fmt.Println("Concurrent, possibly parallel, execution:")
-	fmt.Println("Computing the factorial for a group of numbers...")
+	// fmt.Println("Concurrent, possibly parallel, execution:")
+	// fmt.Println("Computing the factorial for a group of numbers...")
 
 	pairChan := make(chan pair, len(numbers))
 	for _, number := range numbers {
-		go factorialToChan(number, pairChan) // go routines means
+		go factorialToChan(number, pairChan)
 	}
 
 	for range len(numbers) {
-		pair := <-pairChan //sacando del canal par aponer en pair
+		pair := <-pairChan
 		fmt.Printf("Factorial of %d is %d\n", pair.number, pair.factorial)
 	}
 
@@ -68,7 +64,7 @@ func main() {
 	fmt.Println("\nConcurrent, but not parallel, execution:")
 	fmt.Println("The factorial sequence from 1 up to", limit)
 
-	for fact := range factorialSeq(limit) { // secuencialmente esto corre facotrial sec que produce resultado e imprime antes de producir el proximo valor
+	for fact := range factorialSeq(limit) {
 		fmt.Println(fact)
 	}
 }

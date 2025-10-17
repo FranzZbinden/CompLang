@@ -118,27 +118,3 @@ func main() {
 		outFile.WriteString(newEvaluationLine(student))
 	}
 }
-
-func main2() {
-	in_file_name := "students.txt"
-	out_file_name := "evaluations.txt"
-
-	inFile, err := os.Open(in_file_name)
-	if err != nil {
-		panic("Error opening file")
-	}
-	defer inFile.Close()
-
-	outFile, err := os.Create(out_file_name)
-	if err != nil {
-		panic("File not created")
-
-	}
-	defer outFile.Close()
-
-	scanner := bufio.NewScanner(inFile)
-	for scanner.Scan() {
-
-	}
-
-}
