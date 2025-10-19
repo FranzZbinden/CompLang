@@ -17,7 +17,7 @@ import (
 	"strings"
 )
 
-// Declares struct of basic info of employees
+// Declares struct of basic info of all employees
 type employee struct {
 	id         int
 	name       string
@@ -25,19 +25,21 @@ type employee struct {
 	typee      string
 }
 
-// declares type employee hourly
+// Declares struct for hourly employees
 type hourly struct {
 	rate     float64
 	hours    int
 	emp_info employee
 }
 
+// Declares struct for sales employees
 type sales struct {
 	commission   float64
 	sales_amount float64
 	emp_info     employee
 }
 
+// Recives a line of type string and parse it into a hourly employee
 func parse_employee_line_hourly(line string) hourly {
 	fields := strings.Split(line, "|")
 	emp_type := strings.TrimSpace(fields[0])
@@ -60,6 +62,7 @@ func parse_employee_line_hourly(line string) hourly {
 	return hourly{rate: rate_info, hours: int(hours_info), emp_info: employee{id: id, name: name, department: dept, typee: emp_type}}
 }
 
+// Recives a line of type string and parse it into a sales employee
 func parse_employee_line_sales(line string) sales {
 	fields := strings.Split(line, "|")
 	emp_type := strings.TrimSpace(fields[0])
@@ -82,32 +85,39 @@ func parse_employee_line_sales(line string) sales {
 	return sales{commission: commission_info, sales_amount: sales_amm_data, emp_info: employee{id: id, name: name, department: dept, typee: emp_type}}
 }
 
+// Calculates salary of employee type hourly
 func (h hourly) calc_salary() float64 {
 	return h.rate * float64(h.hours)
 }
 
+// Calculates salary of employee type sales
 func (s sales) calc_salary() float64 {
 	return s.commission * s.sales_amount
 }
 
+// Declares an interface for the employees for functions calc_salary
 type employeess interface {
 	calc_salary() float64
 	new_employee_line() string
 }
 
+// Declares a function for determining the employee type of a line
 func employeetype(line string) string {
 	fields := strings.Split(line, "|")
 	return fields[0]
 }
 
+// Builds an employee string
 func (emp hourly) new_employee_line() string {
 	return fmt.Sprintf("%s|%d|%s|%s|%.2f", emp.emp_info.typee, emp.emp_info.id, emp.emp_info.name, emp.emp_info.department, emp.calc_salary())
 }
 
+// Builds an employee string
 func (emp sales) new_employee_line() string {
 	return fmt.Sprintf("%s|%d|%s|%s|%.2f", emp.emp_info.typee, emp.emp_info.id, emp.emp_info.name, emp.emp_info.department, emp.calc_salary())
 }
 
+// Opens the file and returns a pointer to the file
 func open_file_in(in_file_name string) *os.File {
 	in_file, err := os.Open(in_file_name)
 	if err != nil {
@@ -116,6 +126,7 @@ func open_file_in(in_file_name string) *os.File {
 	return in_file
 }
 
+// Creates the file and returns a pointer to the opened file
 func write_file_out(out_file_name string) *os.File {
 	out_file, err := os.Create(out_file_name)
 	if err != nil {

@@ -1,10 +1,10 @@
 /*
  * File: linked_list.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden García
  * Course: COTI 4039-LH1
- * Date: 10/08/2025
+ * Date: 10/19/2025
  * Purpose: This program demonstrates how to define and use a generic
- *          linked list.
+ *          linked list & assigment.
  */
 
 package main
@@ -21,22 +21,52 @@ type list[T comparable] struct {
 	next  *list[T]
 }
 
+// a.	A method that returns the 0-based position of the given value in a generic list:
+func (lst *list[T]) positionOf(target T) int {
+	current := 0
+
+	for curr := lst; curr != nil; curr = curr.next {
+		if curr.value == target {
+			return current
+		}
+		current += 1
+	}
+	return -1
+}
+
+// b.	A method that appends a value at the end of a generic list:
+func (lst *list[T]) append(value T) *list[T] {
+	if lst.next != nil {
+		return lst.next.append(value)
+	}
+	lst.next = &list[T]{next: nil, value: value}
+	return lst
+}
+
+// c.	A function that returns the returns the minimum and maximum of a list of numbers:
+func extrema[N number](lst *list[N]) (min, max N) {
+	max_temp := lst.value
+	min_temp := lst.value
+
+	for curr := lst; curr != nil; curr = curr.next {
+		if curr.value > max_temp {
+			max_temp = curr.value
+		}
+		if curr.value < min_temp {
+			min_temp = curr.value
+		}
+	}
+	return min_temp, max_temp
+}
+
 // Prepends the given value to the given list. (adds a node to the list)
 func cons[T comparable](value T, lst *list[T]) *list[T] {
 	return &list[T]{value, lst}
 }
 
-func cons2[T comparable](val T, lst *list[T]) *list[T] {
-	return &list[T]{value: val, next: lst}
-}
-
 // Determines whether the list is empty.
 func (lst *list[T]) isEmpty() bool {
 	return lst == nil // If the pointer is nil, not pointing at anything then is empty
-}
-
-func (lst *list[T]) isEmpty2() bool {
-	return lst == nil
 }
 
 // Returns the number of elements in a list.
@@ -48,14 +78,6 @@ func (lst *list[T]) length() int {
 	return len
 }
 
-func (lst *list[T]) length2() int {
-	if lst.isEmpty() {
-		return 0
-	}
-	return 1 + lst.next.length2()
-
-}
-
 // Determines whether the list contains the given target.
 func (lst *list[T]) contains(target T) bool {
 	for curr := lst; curr != nil; curr = curr.next {
@@ -64,16 +86,6 @@ func (lst *list[T]) contains(target T) bool {
 		}
 	}
 	return false
-}
-
-func (lst *list[T]) contains2(target T) bool {
-	if lst == nil {
-		return false
-	}
-	if lst.value == target {
-		return true
-	}
-	return lst.next.contains2(target)
 }
 
 // Returns the string representation of the list.
@@ -117,6 +129,19 @@ func main() {
 
 	fmt.Println("\nThe sum of its elements is", sum(numbers))
 
+	target := 20
+	fmt.Println("\nThe position of", target, "is", numbers.positionOf(target))
+
+	// Using append to add 75
+	add_num := 75
+	numbers.append(add_num)
+
+	fmt.Println("After appending", add_num, "the list of numbers is", numbers)
+
+	// func extrema[N number](lst *list[N]) (min, max N) {
+	min, max := extrema(numbers)
+	fmt.Println("The extrema are ", min, "and", max)
+
 }
 
 // Represents the union of common number types.
@@ -131,12 +156,4 @@ func sum[N number](lst *list[N]) N {
 		total += curr.value
 	}
 	return total
-}
-
-func sumation[N number](lst *list[N]) N {
-	var num N
-	for curr := lst; curr != nil; curr = curr.next {
-		num += curr.value
-	}
-	return num
 }
