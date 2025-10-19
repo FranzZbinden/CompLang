@@ -17,6 +17,7 @@ import (
 	"strings"
 )
 
+// Declares struct of basic info of employees
 type employee struct {
 	id         int
 	name       string
@@ -24,6 +25,7 @@ type employee struct {
 	typee      string
 }
 
+// declares type employee hourly
 type hourly struct {
 	rate     float64
 	hours    int
