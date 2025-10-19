@@ -1,0 +1,7 @@
+H|1111|John Doe|IT|15.00|40
+S|2222|Jane Doe|SL|0.15|5000.00
+H|1111|Alex Doe|IT|15.00|40
+S|3333|Jose Doe|SL|0.10|6000.00
+H|4444|Franz Doe|IT|20.00|40
+S|5555|Carlos Doe|SL|0.17|4000.00
+
