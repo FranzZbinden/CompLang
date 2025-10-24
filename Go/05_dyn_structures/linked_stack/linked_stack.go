@@ -1,0 +1,74 @@
+/*
+ * File: linked_stack.go
+ * Author: Antonio F. Huertas
+ * Course: COTI 4039-LH1
+ * Date: 10/20/2025
+ * Purpose: This is the implementation for a generic stack using links.
+ */
+
+package container
+
+import (
+	"errors"
+	"iter"
+)
+
+// Type node represents a generic linked-list node with its data and a
+// pointer to the next node in the list.
+type node[T any] struct {
+	data T
+	next *node[T]
+}
+
+// LinkedStack represents a generic stack using links.
+type LinkedStack[T comparable] struct {
+	top *node[T]
+}
+
+// NewLinkedStack returns an empty linked stack.
+func NewLinkedStack[T comparable]() *LinkedStack[T] {
+	return &LinkedStack[T]{}
+}
+
+// IsEmpty determines whether the stack has zero items.
+func (stk *LinkedStack[T]) IsEmpty() bool {
+	return stk.top == nil
+}
+
+// Push inserts an item at the top of the stack.
+func (stk *LinkedStack[T]) Push(item T) {
+	stk.top = &node[T]{data: item, next: stk.top}
+}
+
+// Pop removes the item at the top of the stack and returns the
+// item or an error if the stack is empty.
+func (stk *LinkedStack[T]) Pop() (item T, err error) {
+	if stk.IsEmpty() {
+		var empty T
+		return empty, errors.New("empty stack")
+	}
+	item = stk.top.data
+	stk.top = stk.top.next
+	return item, nil
+}
+
+// Contains determines whether the stack contains the target item.
+func (stk *LinkedStack[T]) Contains(target T) bool {
+	for curr := stk.top; curr != nil; curr = curr.next {
+		if curr.data == target {
+			return true
+		}
+	}
+	return false
+}
+
+// All returns an iterator over the sequence of stack items.
+func (stk *LinkedStack[T]) All() iter.Seq[T] {
+	return func(yield func(T) bool) {
+		for curr := stk.top; curr != nil; curr = curr.next {
+			if !yield(curr.data) {
+				return
+			}
+		}
+	}
+}

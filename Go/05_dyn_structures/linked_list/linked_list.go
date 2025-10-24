@@ -35,10 +35,6 @@ func (lst *list[T]) isEmpty() bool {
 	return lst == nil // If the pointer is nil, not pointing at anything then is empty
 }
 
-func (lst *list[T]) isEmpty2() bool {
-	return lst == nil
-}
-
 // Returns the number of elements in a list.
 func (lst *list[T]) length() int {
 	len := 0
@@ -46,14 +42,6 @@ func (lst *list[T]) length() int {
 		len++
 	}
 	return len
-}
-
-func (lst *list[T]) length2() int {
-	if lst.isEmpty() {
-		return 0
-	}
-	return 1 + lst.next.length2()
-
 }
 
 // Determines whether the list contains the given target.
