@@ -34,10 +34,7 @@ type Container[T any] interface {
 
 // NewQueue returns an empty linked queue.
 func NewLinkedQueue[T comparable]() *LinkedQueue[T] {
-	return &LinkedQueue[T]{
-		front: *node[T]
-		rear:  *node[T]
-	}
+	return &LinkedQueue[T]{}
 }
 
 // IsEmpty determines whether the queue has zero items.
@@ -47,12 +44,19 @@ func (q *LinkedQueue[T]) IsEmpty() bool {
 
 // enqueue an item at the rear of the queue.
 func (q *LinkedQueue[T]) Enqueue(item T) { // insertar dato al queue
-	q.rear.next = &node[T]{data: item}
-	q.rear = q.rear.next
+	new_node := &node[T]{data: item}
+	if q.IsEmpty() {
+		q.front = new_node // nodo con nuevo item
+		q.rear = new_node
+	} else {
+		q.rear.next = &node[T]{data: item}
+		q.rear = q.rear.next
+	}
+
 }
 
-// Pop removes the item at the top of the stack and returns the
-// item or an error if the stack is empty.
+// dequeue removes the item at the top of the queue and returns the
+// item or an error if the queue is empty.
 func (q *LinkedQueue[T]) Dequeue() (item T, err error) {
 	if q.IsEmpty() {
 		var empty T
@@ -63,9 +67,9 @@ func (q *LinkedQueue[T]) Dequeue() (item T, err error) {
 	return item, nil
 }
 
-// Contains determines whether the stack contains the target item.
-func (stk *LinkedQueue[T]) Contains(target T) bool {
-	for curr := stk.top; curr != nil; curr = curr.next {
+// Contains determines whether the queue contains the target item.
+func (q *LinkedQueue[T]) Contains(target T) bool {
+	for curr := q.front; curr != nil; curr = curr.next {
 		if curr.data == target {
 			return true
 		}
@@ -73,10 +77,10 @@ func (stk *LinkedQueue[T]) Contains(target T) bool {
 	return false
 }
 
-// All returns an iterator over the sequence of stack items.
-func (stk *LinkedQueue[T]) All() iter.Seq[T] {
+// All returns an iterator over the sequence of queue items.
+func (q *LinkedQueue[T]) All() iter.Seq[T] {
 	return func(yield func(T) bool) {
-		for curr := stk.top; curr != nil; curr = curr.next {
+		for curr := q.front; curr != nil; curr = curr.next {
 			if !yield(curr.data) {
 				return
 			}
