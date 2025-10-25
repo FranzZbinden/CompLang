@@ -41,36 +41,12 @@ func readNumber(prompt string) float64 {
 	}
 }
 
-func read_number(prompt string) float64 {
-	for {
-		var value string
-		fmt.Print("\n" + prompt + " ")
-		fmt.Scanln(&value)
-
-		num, err := strconv.ParseFloat(value, 64)
-		if err != nil {
-			fmt.Println("Thers an error with the provided value")
-		} else {
-			return num
-		}
-	}
-}
-
 // Reads a number and validates it is positive.
 func readPositive(prompt string) float64 {
 	num := readNumber(prompt)
 	for num <= 0.0 {
 		fmt.Println("\tError! The value is not a positive number")
 		num = readNumber(prompt)
-	}
-	return num
-}
-
-func read_positive(prompt string) float64 {
-	num := read_number(prompt)
-	if num <= 0 {
-		fmt.Println("Error, value provided must be positive")
-		num = read_number(prompt)
 	}
 	return num
 }
@@ -85,7 +61,7 @@ func main() {
 
 	// ===========================================================
 
-	rad := read_number("Enter the radius of a circle:")
+	rad := readNumber("Enter the radius of a circle:")
 	fmt.Printf("\nThe radius of the circle is %.2f\n", rad)
 
 	circle_area, circle_circumference := circleArea(rad), circleCircumference(rad)

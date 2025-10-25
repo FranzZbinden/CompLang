@@ -1,7 +1,7 @@
 /*
  * File: binary_tree.go
- * Author: Antonio F. Huertas
- * Course: COTI 4039-LH1
+ * Author: Franz Zbinden García
+ * Course: COTI 4039-vH1
  * Date: 10/15/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          binary search tree.
@@ -175,9 +175,6 @@ func (bst *tree[T]) putIntoSeq(yield func(T) bool) bool {
 
 }
 
-//menor, mayor funciones, calcular la profundidad del arbol
-
-// creas un apuntador a un arbol para
 // Starts the execution of the program.
 func main() {
 	numbers := newTree[int](). // los parentesis son porque se esta llamando
@@ -191,7 +188,7 @@ func main() {
 	fmt.Println("The minimum is", numbers.minimum())
 	fmt.Println("The maximum is", numbers.maximum())
 	fmt.Println("The depth of the height is", numbers.height())
-	fmt.Println("The depth of the height2 is", numbers.height())
+	fmt.Println("The depth of the height2 is", numbers.height2())
 
 	fmt.Println("\nThe root value is", numbers.value)
 	fmt.Println("The left subtree is", numbers.left)

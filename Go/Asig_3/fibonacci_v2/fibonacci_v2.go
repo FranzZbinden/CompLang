@@ -11,6 +11,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 type pair struct {
@@ -52,6 +53,7 @@ func fibonacciToChan(num int, ch chan<- pair) {
 
 func main() {
 	nums := []int{7, 8, 6}
+
 	ch := make(chan pair, len(nums))
 
 	// Calls the go routines
@@ -67,4 +69,14 @@ func main() {
 		pairFibo := <-ch
 		fmt.Printf("Fibonacci of %d is %d\n", pairFibo.num, pairFibo.fibo)
 	}
+
+	var value string
+
+	fmt.Print("Enter a positive limit: ")
+	fmt.Scan(&value)
+	limit, err := strconv.Atoi(value)
+	if err != nil {
+		panic("Error entering data")
+	}
+	print(limit)
 }
