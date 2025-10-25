@@ -26,9 +26,18 @@ type LinkedQueue[T comparable] struct {
 	rear  *node[T]
 }
 
-// NewLinkedQueue returns an empty linked queue.
+type Container[T any] interface {
+	IsEmpty() bool
+	Contains(target T) bool
+	All() iter.Seq[T]
+}
+
+// NewQueue returns an empty linked queue.
 func NewLinkedQueue[T comparable]() *LinkedQueue[T] {
-	return &LinkedQueue[T]{}
+	return &LinkedQueue[T]{
+		front: *node[T]
+		rear:  *node[T]
+	}
 }
 
 // IsEmpty determines whether the queue has zero items.
@@ -38,18 +47,19 @@ func (q *LinkedQueue[T]) IsEmpty() bool {
 
 // enqueue an item at the rear of the queue.
 func (q *LinkedQueue[T]) Enqueue(item T) { // insertar dato al queue
-	q.rear = &node[T]{data: item, next: q.rear}
+	q.rear.next = &node[T]{data: item}
+	q.rear = q.rear.next
 }
 
 // Pop removes the item at the top of the stack and returns the
 // item or an error if the stack is empty.
-func (stk *LinkedQueue[T]) Dequeue() (item T, err error) {
-	if stk.IsEmpty() {
+func (q *LinkedQueue[T]) Dequeue() (item T, err error) {
+	if q.IsEmpty() {
 		var empty T
-		return empty, errors.New("empty stack")
+		return empty, errors.New("empty queue")
 	}
-	item = stk.top.data
-	stk.top = stk.top.next
+	item = q.front.data
+	q.front = q.front.next
 	return item, nil
 }
 
