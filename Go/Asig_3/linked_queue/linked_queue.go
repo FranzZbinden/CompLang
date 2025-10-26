@@ -1,7 +1,7 @@
 /*
  * File: linked_queue.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
+ * Course: COTI 4039-VH1
  * Date: 10/23/2025
  * Purpose: This is the implementation for a generic queue using links.
  */
@@ -26,6 +26,7 @@ type LinkedQueue[T comparable] struct {
 	rear  *node[T]
 }
 
+// container interface
 type Container[T any] interface {
 	IsEmpty() bool
 	Contains(target T) bool

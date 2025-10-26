@@ -11,6 +11,7 @@ package main
 
 import (
 	"fmt"
+	"iter"
 	"strconv"
 )
 
@@ -35,21 +36,32 @@ func fibonacciToChan(num int, ch chan<- pair) {
 	ch <- pair{num: num, fibo: a}
 }
 
-// func fibonacciFiniteSeq(limit int) iter.Seq[int]
-// 	var fibos [limit]int
-// 	func(){
-// 		a, b := 0, 1
+// returns an iterator over the the Fibonacci sequence up to the given limit
+func fibonacciFiniteSeq(limit int) iter.Seq[int] {
+	return func(yield func(int) bool) {
+		a, b := 0, 1
+		for cnt := 1; cnt <= +limit; cnt++ {
+			if !yield(b) { // yield first so it starts at 1st fibo num
+				return
+			}
+			temp := a
+			a = b
+			b = temp + b
+		}
+	}
+}
 
-// 		if num == 0 {
-// 			return 0
-// 		}
-// 		for cnt := 0; num > cnt; cnt++ {
-// 			temp := a
-// 			a = b
-// 			b = temp + b
-// 		}
-// 		return a
-// 	}()
+// reads and returns the limit, if error: calls again for correct answear
+func read_number(prompt string) int {
+	var value_in string
+	fmt.Print(prompt)
+	fmt.Scan(&value_in)
+	limit, err := strconv.Atoi(value_in)
+	if err != nil {
+		return read_number("Number must be a positive integer: ")
+	}
+	return limit
+}
 
 func main() {
 	nums := []int{7, 8, 6}
@@ -70,13 +82,14 @@ func main() {
 		fmt.Printf("Fibonacci of %d is %d\n", pairFibo.num, pairFibo.fibo)
 	}
 
-	var value string
+	// sets the limit fron the input of the user
+	limit := read_number("Enter a positive limit:")
 
-	fmt.Print("Enter a positive limit: ")
-	fmt.Scan(&value)
-	limit, err := strconv.Atoi(value)
-	if err != nil {
-		panic("Error entering data")
+	// prints the fibonacci sequence
+	fmt.Println("\nThe fibonacci sequence from 1 up to", limit)
+	index := 0
+	for fact := range fibonacciFiniteSeq(limit) {
+		index += 1
+		fmt.Println("The fibonacci of", index, "is", fact)
 	}
-	print(limit)
 }

@@ -179,8 +179,8 @@ func (bst *tree[T]) putIntoSeq(yield func(T) bool) bool {
 func main() {
 	numbers := newTree[int](). // los parentesis son porque se esta llamando
 					insert(30).
-					insert(10).
 					insert(50).
+					insert(10).
 					insert(40).
 					insert(20)
 

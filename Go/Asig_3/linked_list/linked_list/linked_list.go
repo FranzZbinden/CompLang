@@ -1,7 +1,7 @@
 /*
  * File: linked_list.go
  * Author: Franz Zbinden García
- * Course: COTI 4039-LH1
+ * Course: COTI 4039-VH1
  * Date: 10/19/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          linked list & assigment.
