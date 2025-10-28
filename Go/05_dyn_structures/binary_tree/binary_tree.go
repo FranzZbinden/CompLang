@@ -1,6 +1,6 @@
 /*
  * File: binary_tree.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 10/15/2025
  * Purpose: This program demonstrates how to define and use a generic
@@ -23,6 +23,16 @@ type tree[T cmp.Ordered] struct {
 	right *tree[T]
 }
 
+type tree2[T cmp.Ordered] struct {
+	left  *tree2[T]
+	value T
+	right *tree2[T]
+}
+
+func newTree2[T cmp.Ordered]() *tree[T] {
+	return nil
+}
+
 // funcion
 // Creates a new empty tree.
 func newTree[T cmp.Ordered]() *tree[T] {
@@ -35,8 +45,19 @@ func (bst *tree[T]) isEmpty() bool {
 	return bst == nil
 }
 
+func (bst *tree[T]) isEmpty2() bool {
+	return bst == nil
+}
+
 // Returns the number of elements in the tree.
 func (bst *tree[T]) size() int {
+	if bst == nil {
+		return 0
+	}
+	return 1 + bst.left.size() + bst.right.size()
+}
+
+func (bst *tree[T]) size2() int {
 	if bst == nil {
 		return 0
 	}
@@ -52,6 +73,14 @@ func (bst *tree[T]) sum() T {
 	return bst.value + bst.left.sum() + bst.right.sum()
 }
 
+func (bst *tree[T]) sum2() T {
+	if bst == nil {
+		var zero T
+		return zero
+	}
+	return bst.value + bst.left.sum2() + bst.right.sum2()
+}
+
 // Inserts an element to the tree.
 func (bst *tree[T]) insert(elem T) *tree[T] {
 	if bst == nil { // este no se podria poner fuera de los if statments
@@ -61,6 +90,19 @@ func (bst *tree[T]) insert(elem T) *tree[T] {
 		bst.left = bst.left.insert(elem) //devolvi el arbol cambiado por la izquierda
 	} else if elem > bst.value {
 		bst.right = bst.right.insert(elem) //devolvi el arbol cambiado por la derecha
+	}
+	return bst
+
+}
+
+func (bst *tree[T]) insert2(elem T) *tree[T] {
+	if bst == nil {
+		return &tree[T]{value: elem}
+	}
+	if bst.value > elem {
+		bst.left = bst.left.insert(elem)
+	} else if bst.value < elem {
+		bst.right = bst.right.insert(elem)
 	}
 	return bst
 
