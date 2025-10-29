@@ -95,19 +95,6 @@ func (bst *tree[T]) insert(elem T) *tree[T] {
 
 }
 
-func (bst *tree[T]) insert2(elem T) *tree[T] {
-	if bst == nil {
-		return &tree[T]{value: elem}
-	}
-	if bst.value > elem {
-		bst.left = bst.left.insert(elem)
-	} else if bst.value < elem {
-		bst.right = bst.right.insert(elem)
-	}
-	return bst
-
-}
-
 // Determines whether the tree contains the given target.
 func (bst *tree[T]) contains(target T) bool {
 	if bst == nil { // este no se podria poner fuera de los if statments
@@ -253,15 +240,15 @@ func TreeToLinkedList[T cmp.Ordered](root *tree[T]) *list[T] {
 	return head
 }
 
-func TreeToSlice[T cmp.Ordered](root *tree[T]) []T {
-	if root == nil {
-		return nil
-	}
-	// Traverse left, then node, then right (in-order)
-	left := TreeToSlice(root.left)
-	right := TreeToSlice(root.right)
-	return append(append(left, root.value), right...)
-}
+// func TreeToSlice[T cmp.Ordered](root *tree[T]) []T {
+// 	if root == nil {
+// 		return nil
+// 	}
+// 	// Traverse left, then node, then right (in-order)
+// 	left := TreeToSlice(root.left)
+// 	right := TreeToSlice(root.right)
+// 	return append(append(left, root.value), right...)
+// }
 
 //menor, mayor funciones, calcular la profundidad del arbol
 

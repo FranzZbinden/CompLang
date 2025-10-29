@@ -26,10 +26,6 @@ func cons[T comparable](value T, lst *list[T]) *list[T] {
 	return &list[T]{value, lst}
 }
 
-func cons2[T comparable](val T, lst *list[T]) *list[T] {
-	return &list[T]{value: val, next: lst}
-}
-
 // Determines whether the list is empty.
 func (lst *list[T]) isEmpty() bool {
 	return lst == nil // If the pointer is nil, not pointing at anything then is empty

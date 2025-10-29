@@ -99,10 +99,10 @@ func (bst *tree[T]) insert2(elem T) *tree[T] {
 	if bst == nil {
 		return &tree[T]{value: elem}
 	}
-	if bst.value > elem {
-		bst.left = bst.left.insert(elem)
-	} else if bst.value < elem {
-		bst.right = bst.right.insert(elem)
+	if elem > bst.value {
+		bst.right = bst.right.insert2(elem)
+	} else if elem < bst.value {
+		bst.left = bst.left.insert2(elem)
 	}
 	return bst
 
@@ -117,6 +117,18 @@ func (bst *tree[T]) contains(target T) bool {
 		return bst.left.contains(target)
 	} else if target > bst.value {
 		return bst.right.contains(target)
+	}
+	return true
+}
+
+func (bst *tree[T]) contains2(target T) bool {
+	if bst == nil {
+		return false
+	}
+	if target > bst.value {
+		return bst.right.contains(target)
+	} else if target < bst.value {
+		return bst.left.contains(target)
 	}
 	return true
 }
