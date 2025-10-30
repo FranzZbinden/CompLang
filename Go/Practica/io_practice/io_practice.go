@@ -13,29 +13,65 @@ import (
 	"fmt"
 )
 
+type square struct {
+	width float64
+	depth float64
+}
+
+type cube struct {
+	sqr    square
+	height float64
+}
+
+func create_sqr(width float64, depth float64) square {
+	return square{width: width, depth: depth}
+}
+
+func create_cbe(sqr square, height float64) cube {
+	return cube{sqr: sqr, height: height}
+}
+
+func calc_vol_cube(c cube) float64 {
+	return c.height * c.sqr.depth * c.sqr.width
+}
+
 // Reads a value and validates it is a number.
 func readNumber(prompt string) float64 {
-	var in_str int
+	var in float64
 	fmt.Print(prompt)
-	in_str, err := fmt.Scanln(&in_str)
+	_, err := fmt.Scanln(&in)
 	if err != nil {
 		panic("Error entering values")
 	}
-
-	if readPositive(in) == -1 {
-		panic("Number must be positive")
-	}
+	return in
 }
 
 // Reads a number and validates it is positive.
 func readPositive(prompt string) float64 {
-	if 
+	num := readNumber(prompt)
+	if num < 0 {
+		num = readNumber("Number must be positive float")
+	}
+	return num
+}
 
+func (c cube) toString() string {
+	return fmt.Sprintf("width: %.2f, Depth: %.2f, Height: %.2f", c.sqr.width, c.sqr.depth, c.height)
 }
 
 func main() {
-	input_width := readNumber("Enter the width of a cube")
-	input_depth := readNumber("Enter the depth of a cube")
-	input_height := readNumber("Enter the height of a cube")
+	input_width := readPositive("Enter the width of a cube: ")
+	input_depth := readPositive("Enter the depth of a cube: ")
+	input_height := readPositive("Enter the height of a cube: ")
+
+	sqr := create_sqr(input_width, input_depth)
+
+	cube := create_cbe(sqr, input_height)
+
+	fmt.Println(input_width, input_depth, input_height)
+	fmt.Println()
+	fmt.Println(cube.toString())
+
+	fmt.Println("The volume of the cube is: ", calc_vol_cube(cube))
 
 }
