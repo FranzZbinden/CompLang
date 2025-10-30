@@ -1,6 +1,6 @@
 /*
  * File: circle_calc.go
- * Author: Franz Zbinden Garcia
+ * Author: Franz Zbinden
  * Course: COTI 4039_vh1
  * Porpuse: x
  */

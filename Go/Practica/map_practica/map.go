@@ -1,6 +1,6 @@
 /*
  * File: map_demo.go
- * Author: Franz Zbinden García
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 09/22/2025
  * Purpose: This program demonstrates how to define and use maps.

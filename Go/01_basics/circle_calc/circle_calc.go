@@ -1,6 +1,6 @@
 /*
  * File: circle_calc.go
- * Author: Franz Zbinden Garcia
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 09/08/2025
  * Purpose: This program computes and displays the area and circumference of

@@ -1,6 +1,6 @@
 /*
  * File: factorial_chan.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 10/06/2025
  * Purpose: This program uses channels to concurrently display the factorial

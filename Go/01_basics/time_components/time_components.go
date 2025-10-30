@@ -1,6 +1,6 @@
 /*
  * File: time_components.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 09/08/2025
  * Purpose: This program computes and displays the components (hours, minutes,

@@ -1,6 +1,6 @@
 /*
  * File: students_file_io.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 10/01/2025
  * Purpose: This program reads a group of students from a file, evaluates

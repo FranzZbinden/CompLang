@@ -2,7 +2,7 @@ package container
 
 /*
  * File: container.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 10/20/2025
  * Purpose: This is the interface for a generic container and the error for

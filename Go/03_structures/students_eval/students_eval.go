@@ -1,6 +1,6 @@
 /*
  * File: students_eval.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 09/24/2025
  * Purpose: This program evaluates a group of students to display their data,

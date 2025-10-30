@@ -1,6 +1,6 @@
 /*
  * File: payroll.go
- * Author: Franz Zbinden Garcia
+ * Author: Franz Zbinden
  * Course: COTI 4039-VH1
  * Date: 09/30/2025
  * Purpose: Part 3 of the Assigment.
