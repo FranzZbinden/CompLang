@@ -1,6 +1,6 @@
 /*
  * File: linked_list.go
- * Author: Antonio F. Huertas
+ * Author: Franz Zbinden
  * Course: COTI 4039-LH1
  * Date: 10/08/2025
  * Purpose: This program demonstrates how to define and use a generic
@@ -80,6 +80,14 @@ func (lst *list[T]) all() iter.Seq[T] {
 			}
 		}
 	}
+}
+
+// Collects all elements of the tree into a slice (in-order traversal).
+func (lst *list[T]) putIntoSlice() []T {
+	if lst == nil {
+		return nil
+	}
+	return append([]T{lst.value}, lst.next.putIntoSlice()...)
 }
 
 // Starts the execution of the program.

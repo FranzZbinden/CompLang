@@ -170,7 +170,18 @@ func (bst *tree[T]) putIntoSeq(yield func(T) bool) bool {
 
 }
 
-//menor, mayor funciones, calcular la profundidad del arbol
+// Collects all elements of the tree into a slice (in-order traversal).
+func (bst *tree[T]) putIntoSlice2() []T {
+	if bst == nil {
+		return nil
+	}
+	left := bst.left.putIntoSlice2()   // type pointer to tree
+	right := bst.right.putIntoSlice2() // type pointer to tree
+
+	result := append(left, bst.value)
+	result = append(result, right...)
+	return result
+}
 
 // creas un apuntador a un arbol para
 // Starts the execution of the program.
