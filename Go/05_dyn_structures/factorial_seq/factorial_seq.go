@@ -26,8 +26,35 @@ func factorialFiniteSeq(limit int) iter.Seq[int] {
 	}
 }
 
+func powerFiniteSeq(limit int) iter.Seq[int] {
+	return func(yield func(int) bool) {
+		prod := 1
+		for i := range limit {
+			prod *= i
+			if !yield(prod) {
+				return
+			}
+		}
+	}
+}
+
+func powerInfiniteSeq() iter.Seq[int] {
+	return func(yield func(int) bool) {
+		prod := 1
+		cnt := 0
+		for {
+			cnt++
+			prod *= cnt
+			if !yield(prod) {
+				return
+			}
+		}
+
+	}
+}
+
 // Returns an iterator over the infinite factorial sequence.
-func factorialInfiniteSeq2() iter.Seq[int] {
+func factorialInfiniteSeq() iter.Seq[int] {
 	return func(yield func(int) bool) {
 		prod, cnt := 1, 1
 		for {
