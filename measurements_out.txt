@@ -1,0 +1,3 @@
+width: 9.00, Depth: 10.00, Height: 8.00
+width: 6.00, Depth: 7.00, Height: 5.00
+width: 3.00, Depth: 4.00, Height: 2.00

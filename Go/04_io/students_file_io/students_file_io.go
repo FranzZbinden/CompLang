@@ -109,7 +109,7 @@ func main() {
 	defer outFile.Close() // close outFile when main finishes
 
 	scanner := bufio.NewScanner(inFile)
-	for scanner.Scan() {
+	for scanner.Scan() { // as long as thers lines returns true
 		student, err := parseStudentLine(scanner.Text())
 		if err != nil {
 			println(err.Error())

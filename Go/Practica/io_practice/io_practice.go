@@ -59,6 +59,12 @@ func (c cube) toString() string {
 	return fmt.Sprintf("width: %.2f, Depth: %.2f, Height: %.2f", c.sqr.width, c.sqr.depth, c.height)
 }
 
+func (c *cube) scale_cub(scalar float64) {
+	c.height *= scalar
+	c.sqr.depth *= scalar
+	c.sqr.width *= scalar
+}
+
 func main() {
 	input_width := readPositive("Enter the width of a cube: ")
 	input_depth := readPositive("Enter the depth of a cube: ")
@@ -73,5 +79,10 @@ func main() {
 	fmt.Println(cube.toString())
 
 	fmt.Println("The volume of the cube is: ", calc_vol_cube(cube))
+
+	scalar := 2.0
+	cube.scale_cub(scalar)
+	fmt.Println("The new cube scaled to ", scalar)
+	fmt.Println(cube.toString())
 
 }
