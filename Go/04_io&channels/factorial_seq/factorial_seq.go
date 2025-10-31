@@ -40,6 +40,20 @@ func factorialInfiniteSeq() iter.Seq[int] {
 	}
 }
 
+// Write a function that returns an iterator producing the sequence of powers:
+func powerrSeq(limit int) iter.Seq[int] {
+	return func(yield func(int) bool) {
+		result := 1
+		for num := range limit {
+			result *= num
+			if !yield(result) {
+				return
+			}
+		}
+	}
+
+}
+
 // Starts the execution of the program.
 func main() {
 	limit := 10

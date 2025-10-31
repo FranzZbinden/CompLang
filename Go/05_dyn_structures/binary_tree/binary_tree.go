@@ -136,11 +136,11 @@ func (bst *tree[T]) contains2(target T) bool {
 // Returns the string representation of the tree.
 func (bst *tree[T]) String() string {
 	sb := strings.Builder{}
-	sb.WriteString("tree{ ") //escribes tree{ al principio del string
+	sb.WriteString("tree{ ")
 
 	bst.putIntoString(&sb)
 
-	sb.WriteString("}") //escribes } al final del string
+	sb.WriteString("}")
 	return sb.String()
 }
 
@@ -183,15 +183,34 @@ func (bst *tree[T]) putIntoSlice2() []T {
 	return result
 }
 
-// creas un apuntador a un arbol para
+func (bst *tree[T]) slice_to_tree(arr []T) *tree[T] {
+	if len(arr) == 0 {
+		return bst
+	}
+	val := arr[0]
+	if bst == nil {
+		bst = &tree[T]{value: val}
+	} else if val > bst.value {
+		bst.right = bst.right.slice_to_tree(arr[1:])
+	} else {
+		bst.left = bst.left.slice_to_tree(arr[1:])
+	}
+	return bst.slice_to_tree(arr[1:])
+}
+
 // Starts the execution of the program.
 func main() {
-	numbers := newTree[int](). // los parentesis son porque se esta llamando
-					insert(30).
-					insert(10).
-					insert(50).
-					insert(40).
-					insert(20)
+	numbers := newTree[int]().
+		insert(30).
+		insert(10).
+		insert(50).
+		insert(40).
+		insert(20)
+
+	arr := []int{1, 2, 3, 4}
+	numbers2 := newTree[int]()
+	numbers2.slice_to_tree(arr)
+	fmt.Println(numbers2)
 
 	fmt.Println("The tree of numbers is", numbers)
 	fmt.Println("\nThe root value is", numbers.value)

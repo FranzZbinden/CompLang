@@ -53,7 +53,6 @@ func sumPowers(ch <-chan int) int {
 }
 
 //Receive integers from one channel, send only even ones to another.
-
 func filterEvenPowers(ch <-chan int) <-chan int {
 	even_chan := make(chan int)
 	go func() {
@@ -68,7 +67,6 @@ func filterEvenPowers(ch <-chan int) <-chan int {
 }
 
 // Receive power values from a channel and return the largest. only positives
-
 func maxPower(ch <-chan int) int {
 	max := 0
 	for val := range ch {
@@ -91,6 +89,36 @@ func doubleValues(ch <-chan int) <-chan int {
 	}()
 	return ch_out
 
+}
+
+// Sends the square of each input value.
+func squareValues(ch <-chan int) <-chan int {
+	ch_out := make(chan int)
+	go func() {
+		for val := range ch {
+			ch_out <- val * val
+		}
+		close(ch_out)
+	}()
+	return ch_out
+}
+
+//Computes n-th power for each ch value and sends it.
+func powerOfN(ch <-chan int, n int) <-chan int {
+	ch_out := make(chan int)
+
+	go func() {
+
+		for i := range ch {
+			res := 1
+			for range n {
+				res = res * i
+			}
+			ch_out <- res
+		}
+		close(ch_out)
+	}()
+	return ch_out
 }
 
 // Starts the execution of the program.
