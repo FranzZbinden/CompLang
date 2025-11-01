@@ -1,7 +1,6 @@
 /*
  * File: combine_three.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/10/2025
  * Purpose: This program computes and displays the result of combining three
  *          numbers using the given two-argument function.

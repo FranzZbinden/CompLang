@@ -1,7 +1,6 @@
 /*
  * File: circle_calc_io.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/29/2025
  * Purpose: This program computes and displays the area and circumference of
  *          the circle with the given radius.
@@ -29,13 +28,13 @@ func circleCircumference(rad float64) float64 {
 func readNumber(prompt string) float64 {
 	for {
 		var value string
-		fmt.Print("\n" + prompt + " ") // This prints to the user the request info
-		fmt.Scanln(&value)             // This fetches the info from the user and insert in the addres of value
+		fmt.Print("\n" + prompt + " ")
+		fmt.Scanln(&value)
 
-		num, err := strconv.ParseFloat(value, 64) // Converts the string into a float 64 -> num
-		if err != nil {                           // If thers an error stored into err, print the error message
+		num, err := strconv.ParseFloat(value, 64)
+		if err != nil {
 			fmt.Println("\tError! The value is not a number")
-		} else { //else return the floating point number 64
+		} else {
 			return num
 		}
 	}

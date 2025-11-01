@@ -1,7 +1,6 @@
 /*
  * File: fibonacci.go
- * Author: Franz Zbinden Garcia
- * Course: COTI 4039-VH1
+ * Author: Franz Zbinden
  * Purpose: A file compleating the first part of the Assigment#2
  */
 
@@ -76,15 +75,15 @@ func isSorted[E cmp.Ordered](slice []E) bool {
 func insertionSort[E cmp.Ordered](slice []E) {
 
 	for i := 1; i < len(slice); i++ {
-		key := slice[i]	//element to compare
-		j := i - 1		//element to be compared to
+		key := slice[i]
+		j := i - 1
 
 		for j >= 0 && slice[j] > key {
 			slice[j+1] = slice[j]
 			j--
 		}
 
-		slice[j+1] = key	//inserts element in correct spot
+		slice[j+1] = key
 	}
 }
 

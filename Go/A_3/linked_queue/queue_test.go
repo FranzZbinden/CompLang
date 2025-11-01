@@ -1,7 +1,6 @@
 /*
  * File: queue_test.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 10/20/2025
  * Purpose: This is the set of unit tests for generic queues.
  * Note: Use the 'go test -v' command to run all tests.

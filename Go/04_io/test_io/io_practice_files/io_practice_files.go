@@ -1,7 +1,6 @@
 /*
  * File: cube_calc_io.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/29/2025
  * Purpose: This program computes and displays the area and circumference of
  *          the circle with the given radius.

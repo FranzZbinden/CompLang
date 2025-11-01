@@ -1,12 +1,11 @@
 /*
  * File: binary_tree.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 10/15/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          binary search tree.
  */
-// bst al principio esta apuntando al root
+
 package main
 
 import (
@@ -67,7 +66,7 @@ func (bst *tree[T]) size2() int {
 // Sums the elements in the tree.
 func (bst *tree[T]) sum() T {
 	if bst == nil {
-		var zero T // en ves de devolver un 0 devuelve una variable generica
+		var zero T
 		return zero
 	}
 	return bst.value + bst.left.sum() + bst.right.sum()
@@ -83,13 +82,13 @@ func (bst *tree[T]) sum2() T {
 
 // Inserts an element to the tree.
 func (bst *tree[T]) insert(elem T) *tree[T] {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return &tree[T]{left: nil, value: elem, right: nil}
 	}
 	if elem < bst.value {
-		bst.left = bst.left.insert(elem) //devolvi el arbol cambiado por la izquierda
+		bst.left = bst.left.insert(elem)
 	} else if elem > bst.value {
-		bst.right = bst.right.insert(elem) //devolvi el arbol cambiado por la derecha
+		bst.right = bst.right.insert(elem)
 	}
 	return bst
 
@@ -97,7 +96,7 @@ func (bst *tree[T]) insert(elem T) *tree[T] {
 
 // Determines whether the tree contains the given target.
 func (bst *tree[T]) contains(target T) bool {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return false
 	}
 	if target < bst.value {
@@ -111,11 +110,11 @@ func (bst *tree[T]) contains(target T) bool {
 // Returns the string representation of the tree.
 func (bst *tree[T]) String() string {
 	sb := strings.Builder{}
-	sb.WriteString("tree{ ") //escribes tree{ al principio del string
+	sb.WriteString("tree{ ")
 
 	bst.putIntoString(&sb)
 
-	sb.WriteString("}") //escribes } al final del string
+	sb.WriteString("}")
 	return sb.String()
 }
 
@@ -162,7 +161,7 @@ func cons2[T comparable](val T, lst *list[T]) *list[T] {
 
 // Determines whether the list is empty.
 func (lst *list[T]) isEmpty() bool {
-	return lst == nil // If the pointer is nil, not pointing at anything then is empty
+	return lst == nil
 }
 
 // Returns the number of elements in a list.
@@ -255,12 +254,12 @@ func TreeToLinkedList[T cmp.Ordered](root *tree[T]) *list[T] {
 // creas un apuntador a un arbol para
 // Starts the execution of the program.
 func main() {
-	numbers := newTree[int](). // los parentesis son porque se esta llamando
-					insert(30).
-					insert(10).
-					insert(50).
-					insert(40).
-					insert(20)
+	numbers := newTree[int]().
+				insert(30).
+				insert(10).
+				insert(50).
+				insert(40).
+				insert(20)
 
 	fmt.Println("The tree of numbers is", numbers)
 	fmt.Println("\nThe root value is", numbers.value)

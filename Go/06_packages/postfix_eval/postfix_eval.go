@@ -1,7 +1,6 @@
 /*
  * File: postfix_eval_io.go
- * Author: Antonio F. Huertas
- * Course: COTI 4039-LH1
+ * Author: Franz Zbinden
  * Date: 10/20/2025
  * Purpose: This program evaluates a postfix expression.
  */
@@ -57,7 +56,7 @@ func evalBinaryExpr(operand1, operand2 int, operator string) (int, error) {
 
 // Function evalPostfixExpr returns the result of evaluating a postfix
 // expression or an error for an invalid expression.
-func evalPostfixExpr(postfix string) (int, error) { //saco operando, evaluo y devuelvo
+func evalPostfixExpr(postfix string) (int, error) {
 	operands := container.NewLinkedStack[int]()
 	tokens := strings.SplitSeq(postfix, " ")
 

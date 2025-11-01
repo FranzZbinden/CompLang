@@ -1,7 +1,6 @@
 /*
  * File: students_file_io.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 10/01/2025
  * Purpose: This program reads a group of students from a file, evaluates
  *          them, and creates a new file with their average and grade.
@@ -100,16 +99,16 @@ func main() {
 	if err != nil {
 		panic("Error opening input file " + inFilename)
 	}
-	defer inFile.Close() // close inFile when main finishes
+	defer inFile.Close()
 
 	outFile, err := os.Create(outFilename)
 	if err != nil {
 		panic("Error opening output file " + outFilename)
 	}
-	defer outFile.Close() // close outFile when main finishes
+	defer outFile.Close()
 
 	scanner := bufio.NewScanner(inFile)
-	for scanner.Scan() { // as long as thers lines returns true
+	for scanner.Scan() {
 		student, err := parseStudentLine(scanner.Text())
 		if err != nil {
 			println(err.Error())

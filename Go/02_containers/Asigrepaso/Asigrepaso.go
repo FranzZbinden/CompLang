@@ -1,7 +1,6 @@
 /*
  * File: fibonacci.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Purpose: A file compleating the first part of the Assigment#2
  */
 

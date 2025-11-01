@@ -1,12 +1,11 @@
 /*
  * File: binary_tree.go
- * Author: Franz Zbinden García
- * Course: COTI 4039-vH1
+ * Author: Franz Zbinden
  * Date: 10/15/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          binary search tree.
  */
-// bst al principio esta apuntando al root
+
 package main
 
 import (
@@ -82,13 +81,11 @@ type tree[T cmp.Ordered] struct {
 	right *tree[T]
 }
 
-// funcion
 // Creates a new empty tree.
 func newTree[T cmp.Ordered]() *tree[T] {
 	return nil
 }
 
-// metodo
 // Determines whether the tree is empty.
 func (bst *tree[T]) isEmpty() bool {
 	return bst == nil
@@ -105,7 +102,7 @@ func (bst *tree[T]) size() int {
 // Sums the elements in the tree.
 func (bst *tree[T]) sum() T {
 	if bst == nil {
-		var zero T // en ves de devolver un 0 devuelve una variable generica
+		var zero T
 		return zero
 	}
 	return bst.value + bst.left.sum() + bst.right.sum()
@@ -113,13 +110,13 @@ func (bst *tree[T]) sum() T {
 
 // Inserts an element to the tree.
 func (bst *tree[T]) insert(elem T) *tree[T] {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return &tree[T]{left: nil, value: elem, right: nil}
 	}
 	if elem < bst.value {
-		bst.left = bst.left.insert(elem) //devolvi el arbol cambiado por la izquierda
+		bst.left = bst.left.insert(elem)
 	} else if elem > bst.value {
-		bst.right = bst.right.insert(elem) //devolvi el arbol cambiado por la derecha
+		bst.right = bst.right.insert(elem)
 	}
 	return bst
 
@@ -127,7 +124,7 @@ func (bst *tree[T]) insert(elem T) *tree[T] {
 
 // Determines whether the tree contains the given target.
 func (bst *tree[T]) contains(target T) bool {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return false
 	}
 	if target < bst.value {
@@ -141,11 +138,11 @@ func (bst *tree[T]) contains(target T) bool {
 // Returns the string representation of the tree.
 func (bst *tree[T]) String() string {
 	sb := strings.Builder{}
-	sb.WriteString("tree{ ") //escribes tree{ al principio del string
+	sb.WriteString("tree{ ")
 
 	bst.putIntoString(&sb)
 
-	sb.WriteString("}") //escribes } al final del string
+	sb.WriteString("}")
 	return sb.String()
 }
 
@@ -177,12 +174,12 @@ func (bst *tree[T]) putIntoSeq(yield func(T) bool) bool {
 
 // Starts the execution of the program.
 func main() {
-	numbers := newTree[int](). // los parentesis son porque se esta llamando
-					insert(30).
-					insert(50).
-					insert(10).
-					insert(40).
-					insert(20)
+	numbers := newTree[int]().
+		insert(30).
+		insert(50).
+		insert(10).
+		insert(40).
+		insert(20)
 
 	fmt.Println("The tree of numbers is", numbers)
 	fmt.Println("The minimum is", numbers.minimum())

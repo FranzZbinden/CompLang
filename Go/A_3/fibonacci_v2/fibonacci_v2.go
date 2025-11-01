@@ -1,7 +1,6 @@
 /*
  * File: fibonacci_v2.go
- * Author: Franz Zbinden García
- * Course: COTI 4039-LH1
+ * Author: Franz Zbinden
  * Date: 10/16/2025
  * Purpose: This program uses channels to concurrently display the fibonacci
  *          of some non-negatives integers.

@@ -1,7 +1,6 @@
 /*
  * File: students_eval.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/24/2025
  * Purpose: This program evaluates a group of students to display their data,
  *          average and grade.
@@ -14,13 +13,13 @@ import "fmt"
 // Represents a student with id, name, and list of exams.
 type student struct {
 	id, name string
-	exams    []int //exams tipo arreglos
+	exams    []int
 }
 
 // Represents an evaluation consisting of average and grade.
 type evaluation struct {
 	average float64
-	grade   rune //char = rune
+	grade   rune
 }
 
 // Returns the average of the given slice of integers.

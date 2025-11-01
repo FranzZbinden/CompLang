@@ -1,7 +1,6 @@
 /*
  * File: linked_list.go
- * Author: Franz Zbinden García
- * Course: COTI 4039-VH1
+ * Author: Franz Zbinden
  * Date: 10/19/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          linked list & assigment.
@@ -66,7 +65,7 @@ func cons[T comparable](value T, lst *list[T]) *list[T] {
 
 // Determines whether the list is empty.
 func (lst *list[T]) isEmpty() bool {
-	return lst == nil // If the pointer is nil, not pointing at anything then is empty
+	return lst == nil
 }
 
 // Returns the number of elements in a list.

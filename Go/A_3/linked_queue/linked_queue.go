@@ -1,7 +1,6 @@
 /*
  * File: linked_queue.go
  * Author: Franz Zbinden
- * Course: COTI 4039-VH1
  * Date: 10/23/2025
  * Purpose: This is the implementation for a generic queue using links.
  */
@@ -44,10 +43,10 @@ func (q *LinkedQueue[T]) IsEmpty() bool {
 }
 
 // enqueue an item at the rear of the queue.
-func (q *LinkedQueue[T]) Enqueue(item T) { // insertar dato al queue
+func (q *LinkedQueue[T]) Enqueue(item T) {
 	new_node := &node[T]{data: item}
 	if q.IsEmpty() {
-		q.front = new_node // nodo con nuevo item
+		q.front = new_node
 		q.rear = new_node
 	} else {
 		q.rear.next = &node[T]{data: item}

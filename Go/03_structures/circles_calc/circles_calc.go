@@ -1,7 +1,6 @@
 /*
  * File: circles_calc.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/24/2025
  * Purpose: This program computes and displays the area and circumference of
  *          the given circles.
@@ -83,9 +82,3 @@ func main() {
 	fmt.Printf("Its area is %.1f and its circumference is %.1f\n",
 		c2.area(), c2.circumference())
 }
-
-//Notes
-
-// *type = pointer to type
-// &var = address of var
-// *var = the things pointed log var

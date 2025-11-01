@@ -3,7 +3,6 @@ package container
 /*
  * File: container.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 10/20/2025
  * Purpose: This is the interface for a generic container and the error for
  *          an empty container.

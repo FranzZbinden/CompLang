@@ -1,12 +1,11 @@
 /*
  * File: binary_tree.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 10/15/2025
  * Purpose: This program demonstrates how to define and use a generic
  *          binary search tree.
  */
-// bst al principio esta apuntando al root
+
 package main
 
 import (
@@ -33,13 +32,11 @@ func newTree2[T cmp.Ordered]() *tree[T] {
 	return nil
 }
 
-// funcion
 // Creates a new empty tree.
 func newTree[T cmp.Ordered]() *tree[T] {
 	return nil
 }
 
-// metodo
 // Determines whether the tree is empty.
 func (bst *tree[T]) isEmpty() bool {
 	return bst == nil
@@ -67,7 +64,7 @@ func (bst *tree[T]) size2() int {
 // Sums the elements in the tree.
 func (bst *tree[T]) sum() T {
 	if bst == nil {
-		var zero T // en ves de devolver un 0 devuelve una variable generica
+		var zero T
 		return zero
 	}
 	return bst.value + bst.left.sum() + bst.right.sum()
@@ -83,13 +80,13 @@ func (bst *tree[T]) sum2() T {
 
 // Inserts an element to the tree.
 func (bst *tree[T]) insert(elem T) *tree[T] {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return &tree[T]{left: nil, value: elem, right: nil}
 	}
 	if elem < bst.value {
-		bst.left = bst.left.insert(elem) //devolvi el arbol cambiado por la izquierda
+		bst.left = bst.left.insert(elem)
 	} else if elem > bst.value {
-		bst.right = bst.right.insert(elem) //devolvi el arbol cambiado por la derecha
+		bst.right = bst.right.insert(elem)
 	}
 	return bst
 
@@ -110,7 +107,7 @@ func (bst *tree[T]) insert2(elem T) *tree[T] {
 
 // Determines whether the tree contains the given target.
 func (bst *tree[T]) contains(target T) bool {
-	if bst == nil { // este no se podria poner fuera de los if statments
+	if bst == nil {
 		return false
 	}
 	if target < bst.value {

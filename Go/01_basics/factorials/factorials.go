@@ -1,7 +1,6 @@
 /*
  * File: factorials.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/15/2025
  * Purpose: This program computes and displays the factorial of a non-negative integer
  *          using various techniques.
@@ -12,10 +11,10 @@ package main
 import "fmt"
 
 // Computes the factorial of an integer using a simple loop.
-func factorial(num int) int { //like a while loop, in go thers no while loop
+func factorial(num int) int {
 	prod := 1
 	for num > 0 {
-		prod *= num // == than prod = prod * num
+		prod *= num
 		num--
 	}
 	return prod
@@ -24,7 +23,7 @@ func factorial(num int) int { //like a while loop, in go thers no while loop
 // Computes the factorial of an integer using a three-part for loop.
 func factorial2(num int) int {
 	prod := 1
-	for cnt := 1; cnt <= num; cnt++ { //this is a traditional for loop
+	for cnt := 1; cnt <= num; cnt++ {
 		prod *= cnt
 	}
 	return prod

@@ -1,7 +1,6 @@
 /*
  * File: payroll_file_io.go
- * Author: Franz Zbinden García
- * Course: COTI 4039-VH1
+ * Author: Franz Zbinden
  * Date: 10/18/2025
  * Purpose: This Program reads a file of five employees of different types and creates a payroll
  * file with their data and weekly salary.

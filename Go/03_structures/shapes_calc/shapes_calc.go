@@ -1,7 +1,6 @@
 /*
  * File: shapes_calc.go
  * Author: Franz Zbinden
- * Course: COTI 4039-LH1
  * Date: 09/24/2025
  * Purpose: This program displays the data, area, and perimeter for each element
  *          in a list of shapes.
@@ -14,7 +13,6 @@ import (
 	"math"
 )
 
-// iota asigna un valor a todas las variables en seuencia (1,2,3,4,5)
 // Represents the set of available colors.
 type color int
 
@@ -27,7 +25,6 @@ const (
 	yellow
 )
 
-// ASignacion para enumeracion de los departamentos
 // Returns the string representation of the color.
 func (c color) String() string {
 	if black > c || c > yellow {
@@ -52,12 +49,12 @@ type point struct {
 
 // Returns the string representation of the point.
 func (p point) String() string {
-	return fmt.Sprintf("(%.1f, %.1f)", p.x, p.y) //para aplicar formato
+	return fmt.Sprintf("(%.1f, %.1f)", p.x, p.y)
 }
 
 // Represents the common information for all shapes.
 type shapeInfo struct {
-	color    //Crear un campo en shapeInfo llamado color
+	color
 	location point
 }
 
@@ -66,7 +63,6 @@ func (si shapeInfo) String() string {
 	return fmt.Sprintf("color: %s, location: %s", si.color, si.location)
 }
 
-// Interface hace una especia de contrato para las funciones, alfo asi
 // Represents the set of methods common to any shape.
 type shape interface {
 	area() float64

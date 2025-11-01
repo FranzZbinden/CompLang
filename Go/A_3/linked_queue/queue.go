@@ -1,7 +1,6 @@
 /*
  * File: queue.go
- * Author: Antonio F. Huertas
- * Course: COTI 4039-LH1
+ * Author: Franz Zbinden
  * Date: 10/20/2025
  * Purpose: This is the interface for a generic queue.
  */

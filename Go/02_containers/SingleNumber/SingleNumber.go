@@ -1,6 +1,5 @@
 /* File: my_slice_fns.go
  * Author: Franz Zbinden
- * Course: COTI 4039-VH1
  * Purpose: This program demonstrates how to define some slice functions.
  */
 
