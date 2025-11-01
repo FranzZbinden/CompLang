@@ -1,1 +1,1 @@
-Repository for the Programming Languages Comparison course at the University of Puerto Rico
+This repository contains a collection of exercises and small projects created while learning Go programming language. 
